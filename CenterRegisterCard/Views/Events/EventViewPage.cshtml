@@ -1,0 +1,43 @@
+﻿@model CenterRegisterCard.Domain.Models.Event;
+@using CenterRegisterCard.DAL;
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Мероприятие</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    @{
+        if(CenterRegisterCardContext.employeeAccount !=null){
+    <button style="margin-left: 3px;">
+        <a href="@Url.Action("EventEdit", "Employee", new {eventId = $"{Model.EventId}" })">Редактировать</a>
+    </button>
+        }
+    }
+    <header>
+        <h1>Мероприятие</h1>
+    </header>
+
+    <nav>
+    </nav>
+
+    <main>
+        <div class="event-details">
+            <h2>@Model.Title</h2>
+            <img style="width: 100%;
+                border-top-left-radius: calc(.25rem - 1px);
+                border-top-right-radius: calc(.25rem - 1px);
+                vertical-align: middle;
+                border-style: none;" src="~/EventImages/@Model.ImageEvent" />
+            <p>Дата: @Model.DateEvent.ToLongDateString()</p>
+            <p>Время проведения: @Model.TimeEvent.ToShortTimeString()</p>
+            <p>Место: @Model.Location</p>
+            <p>Описание:@Model.DescriptionTitle</p>
+            <p>@Model.Description</>
+            
+        </div>
+    </main>
+    <footer>
+    </footer>
+</body>
+</html>

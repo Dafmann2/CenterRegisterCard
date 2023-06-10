@@ -1,0 +1,113 @@
+﻿@using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Model;
+@model CenterRegisterCard.Domain.ViewModels.Account.RegisterViewModel
+@using CenterRegisterCard.DAL;
+
+@{
+    Layout = "_Layout";
+    ViewData["Title"] = "Регистрация";
+}
+
+<div style="padding: 20px;"></div>
+
+<div class="container py-5">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="row justify-content-center">
+                <div class="col-md-10">
+                    <span class="anchor"></span>
+                    <div class="card card-account card-outline-secondary border border-white">
+                        <div class="card-header">
+                            <h3 class="mb-0 text-center paragraphHome text-black">Регистрация</h3>
+                        </div>
+                        <div class="card-body">
+                            <form asp-controller="Account" asp-action="Register">
+                                <div asp-validation-summary="All" style="font-size:23px; font-family:Impact" class="text-danger text-center"></div>
+                                <div class="form-group">
+                                    <div class="form-text">
+                                        <div class="form-text">Фамилия</div>
+                                     <input asp-for="Surname" class="form-control textbox-dg font-weight-bold text-center" placeholder="Фамилия" type="text">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="form-text">Имя</div>
+                                    <input asp-for="Name" class="form-control textbox-dg font-weight-bold text-center" placeholder="Имя" type="text">
+                                </div>
+                                <div class="form-group">
+                                    <div class="form-text">Отчество</div>
+                                    <input asp-for="Patronymic" class="form-control textbox-dg font-weight-bold text-center" placeholder="Отчество" type="text">
+                                </div>
+                                <div class="form-group">
+                                    <div class="form-text">Почта</div>
+                                    <input asp-for="Email" class="form-control textbox-dg font-weight-bold text-center" placeholder="Почта" type="text">
+                                </div>
+                                <div class="form-group">
+                                    <div class="form-text">Номер телефона</div>
+                                    <input id="number" asp-for="PhoneNumber" typeof="number" maxlength="11"  class="form-control textbox-dg font-weight-bold text-center" placeholder="Телефон" type="text">
+                                        <script>
+                                            document.getElementById('number').onkeydown = function (e) {
+                                                return !(/^[А-Яа-яA-Za-z ]$/.test(e.key));
+                                            }
+                                        </script>
+                                </div>
+                                <div class="form-group">
+                                    <div class="form-text">Серия и номер паспорта</div>
+                                    <input id="passport" asp-for="PassportSeriesNumber" maxlength="10" class="form-control textbox-dg font-weight-bold text-center" placeholder="Паспорт серия и номер" type="text">
+                                    <script>
+                                        document.getElementById('passport').onkeydown = function (e) {
+                                            return !(/^[А-Яа-яA-Za-z ]$/.test(e.key));
+                                        }
+                                    </script>
+                                </div>
+                                <div class="form-group">
+                                    <div class="form-text">ИНН</div>
+                                    <input id="inn" asp-for="INN" maxlength="12" class="form-control textbox-dg font-weight-bold text-center" placeholder="ИНН" type="text">
+                                    <script>
+                                        document.getElementById('inn').onkeydown = function (e) {
+                                            return !(/^[А-Яа-яA-Za-z ]$/.test(e.key));
+                                        }
+                                    </script>
+                                </div>
+                                <div class="form-group">
+                                    <div class="form-text">Категория социальной группы</div>
+                                    <select asp-for="CategoryBeneficiaryID" asp-items="CenterRegisterCardContext.listcategory">
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <div class="form-text">Логин</div>
+                                    <input asp-for="Login" class="form-control textbox-dg font-weight-bold text-center" placeholder="Логин" type="text">
+                                </div>
+                                <span class="text-black" style="font-size: small; font-family:'Comic Sans MS'">Пароль должен быть длиной больше 6 символов и иметь только латинские символы</span>
+                                <div class="form-group">
+                                    <div class="form-text">Пароль</div>
+                                    <input autocomplete="new-password" asp-for="Password" placeholder="Пароль" class="form-control textbox-dg font-weight-bold text-center" type="password">
+                                </div>
+                                <div class="form-group">
+                                    <div class="form-text">Повторите пароль</div>
+                                    <input autocomplete="new-password" asp-for="PasswordConfirm" placeholder="Подтвердите пароль" class="form-control textbox-dg font-weight-bold text-center" type="password">
+                                </div>
+                                <div>
+                                    <a class="button-settings">Дата рождения</a>
+                                    <div>
+                                        <input placeholder="dd-mm-yyyy" type="date" min="@DateTime.Now.AddYears(-100).ToString("yyyy-MM-dd")"
+                                               max="@DateTime.Now.ToString("yyyy-MM-dd")" name="date" id="dateofbirth">
+                                    </div>
+                                </div>
+                                <div>
+                                    @*<label asp-for="ImageFile" class="control-label" />
+                                    <input asp-for="ImageFile" name="filename" class="form-control" accept="image/jpg,image/jpeg" />
+                                    <span asp-validation-for="ImageFile" class="text-danger"></span>*@
+                                    @*<input asp-for="ImageFile" type="file" name="uploadedFile" /><br>
+                                    <input type="submit" value="Загрузить" />*@
+                                </div>
+                                <div>
+                                    <h2 class="paragraphHome text-center"><a asp-controller="Account" target="_blank" asp-action="Login" style="color:deepskyblue;">Вход</a></h2>
+                                </div>
+                                <button class="btn btn-success btn-lg float-right" type="submit">Отправить</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,29 @@
+﻿@using CenterRegisterCard.Domain.Models;
+@using CenterRegisterCard.DAL;
+
+<head>
+    <link rel="stylesheet" href="~/css/Chatcss.css">
+</head>
+<div class="chat-card">
+    <div class="chat-header">
+        <div class="h2">Чат техподдержки</div>
+    </div>
+    <div class="chat-body">
+        @{
+            foreach(ChatTechnicalSupport chat in ViewBag.ChatList){
+                if(CenterRegisterCardContext.userAccount !=null){
+                    <div class="message incoming">
+                         <p>Hello, how can I assist you today?</p>
+                    </div>
+                    <div class="message outgoing">
+                        <p>@chat.DateMessage</p>
+                    </div>
+                }
+            }
+        }
+    </div>
+    <div class="chat-footer">
+        <input placeholder="Type your message" type="text">
+        <button>Send</button>
+    </div>
+</div>

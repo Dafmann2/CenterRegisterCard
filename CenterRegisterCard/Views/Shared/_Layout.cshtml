@@ -1,0 +1,115 @@
+﻿@using CenterRegisterCard.DAL;
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"]</title>
+    <link rel="icon" href="~/Icon.ico" type="image/x-icon"/>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap-grid.css"/>
+    <link rel="stylesheet" href="~/css/site.css"/>
+    <link rel="stylesheet" href="~/css/Layout.css"/>
+    <link rel="stylesheet" href="~/css/CardAnimation.css"/>
+    <link rel="stylesheet" href="~/css/BackImagePage.css">
+</head>
+<body>
+    <header>
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+            <div class="container">
+                <a class="a_layout_header" asp-area="" asp-controller="Home" asp-action="Index">
+                <img  src="~/Images/logo.png" width="400" height="70" />
+                </a>
+               
+                
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
+                    <ul class="navbar-nav flex-grow-1">
+                        <li class="nav-item">
+                            <a class="a_layout_header" asp-area="" asp-controller="Home" asp-action="Index">Главная</a>
+                        </li>
+                       
+                        <li class="nav-item">
+                            <a class="a_layout_header" asp-area="" asp-controller="Events" asp-action="Events">Мероприятия</a>
+                        </li>
+                        
+                            <li class="nav-item dropdown">
+                                <a class="dropdown-toggle a_layout_header" href="#" id="navbarDropdown" role="button" data-toggle="dropdown">
+                                    Личный кабинет
+                                </a>
+                                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                    <div class="container">
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <ul class="nav flex-column paragraphHome">
+                                                @if (CenterRegisterCardContext.userAccount == null & CenterRegisterCardContext.employeeAccount == null)
+                                                {
+                                                    <li class="nav-item text-center">
+                                                        <a class="nav-link active text-white" asp-controller="Account" asp-action="Register">
+                                                            Регистрация
+                                                        </a>
+                                                    </li>
+                                                    <li class="nav-item text-center">
+                                                        <a class="nav-link active text-white" asp-controller="Account" asp-action="Login">
+                                                            Вход
+                                                        </a>
+                                                    </li>
+                                                }
+                                                @if (CenterRegisterCardContext.userAccount != null)
+                                                {
+                                                    <li class="nav-item text-center">
+                                                        <a class="nav-link active text-white" asp-controller="Account" asp-action="PersonalAccount">
+                                                            Профиль
+                                                        </a>
+                                                    </li>
+                                                    <li class="nav-item text-center">
+                                                        <a class="nav-link active text-white" asp-controller="Account" asp-action="Logout">
+                                                            Выход
+                                                        </a>
+                                                    </li>
+                                                }
+                                                @if (CenterRegisterCardContext.employeeAccount != null)
+                                                {
+                                                    <li class="nav-item text-center">
+                                                        <a class="nav-link active text-white" asp-controller="Employee" asp-action="UsersListActivate">
+                                                            Заявки
+                                                        </a>
+                                                    </li>
+                                                    <li class="nav-item text-center">
+                                                        <a class="nav-link active text-white" asp-controller="Account" asp-action="Logout">
+                                                            Выход
+                                                        </a>
+                                                    </li>
+                                                }
+
+                                            </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>      
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+    <div class="container">
+        <main role="main" class="pb-3">
+            @RenderBody()
+        </main>
+    </div>
+
+    <footer class="border-top footer text-muted">
+        <div class="container">
+            &copy; 2023 - ЦРК - <a asp-area="" asp-controller="Home" asp-action="Privacy">О нас</a>
+        </div>
+    </footer>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

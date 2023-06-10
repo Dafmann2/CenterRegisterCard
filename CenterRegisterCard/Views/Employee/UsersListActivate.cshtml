@@ -1,0 +1,65 @@
+﻿@model CenterRegisterCard.Domain.ViewModels.Account.RegisterViewModel;
+@using CenterRegisterCard.Domain.Models;
+@using CenterRegisterCard.FormatsData;
+@using CenterRegisterCard.DAL;
+
+<head>
+    <link rel="stylesheet" href="~/css/CardEmployee.css" />
+</head>
+
+<div class="card">
+    <div class="card-top-part">
+        <div class="left-part">
+            <div class="user-name">
+                <p style="font-size:24px" class="nameemployee">@CenterRegisterCardContext.employeeAccount.Surename @CenterRegisterCardContext.employeeAccount.Name</p>
+                <p style="font-size:18px" class="role"> Admin </p>
+            </div>
+            <div class="user-position">
+                <p class="position">
+                </p>
+            </div>
+        </div>
+        <div class="right-part">
+            <div class="user-photo">
+                <img src="~/Images/Admin.jpg" class="photo">
+            </div>
+        </div>
+    </div>
+</div>
+
+
+    <table class="container " style="border-collapse: collapse; border-spacing: 0; width: 100%;">
+        <thead>
+            <tr>
+                <th>ФИО</th>
+                <th>Статус</th>
+                <th>Посмотреть</th>
+                <th>Справка</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @{
+                foreach (User user in ViewBag.Users)
+                {
+                if (user.UserStatusId != 3 & user.UserStatusId != 2 & user.UserStatusId != 4)
+                    {
+                        <tr>
+                            <td>@user.Surname @user.Name @user.Patronymic</td>
+                            <td>Ожидание подтверждения</td>
+                            <td>
+                                <a href="@Url.Action("Download", "Employee", new { fileName = $"{user.PassportSeriesNumber}.docx" })">Скачать файл</a>
+                            </td>
+                            <td>
+                            <a href="@Url.Action("DownloadPDFDocument", "Employee", new { fileName = $"{user.DocumentImgName}" })">Скачать файл</a>
+                            </td>
+                            <td>
+                                <a href="@Url.Action("StatusActivateUser", "Employee", new { passport = $"{user.PassportSeriesNumber}" })">Активировать заявление</a>
+                                <a href="@Url.Action("StatusBlockUser", "Employee", new { passport = $"{user.PassportSeriesNumber}" })">Отклонить заявление</a>
+                            </td>
+                        </tr>
+                    }
+                }
+            }
+        </tbody>
+    </table>

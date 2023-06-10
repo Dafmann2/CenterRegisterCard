@@ -1,0 +1,31 @@
+﻿.img_logo_png{
+    background-image:url(../Images/logo.png);
+    width:40px;
+    height:10px
+}
+
+.a_layout_header{
+    font-size: 3ex;
+    color:black;
+    font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    margin:20px;
+}
+.a_item_account_li{
+    font-size:2ex;
+    color:black;
+}
+
+.navbar .dropdown-menu div[class*="col"]
+{
+    margin-bottom:1rem;
+}
+.navbar .dropdown-menu{
+    border:none;
+    background-color:black !important;
+}
+
+.a_dropmenu_item{
+    color:aqua;
+    font-size:1ex;
+    align-content:center;
+}

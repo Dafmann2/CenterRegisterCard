@@ -1,0 +1,16 @@
+﻿@using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Model;
+@model CenterRegisterCard.Domain.ViewModels.Account.EventAddViewModel;
+@using CenterRegisterCard.DAL;
+
+@{
+    Layout = "_Layout";
+    ViewBag.Title = "Регистрация";
+}
+<p>
+    Комментарий<Br>
+    <textarea name="comment"></textarea>
+</p>
+<p>
+    <input type="submit" value="Отправить">
+    <input type="reset" value="Очистить">
+</p>

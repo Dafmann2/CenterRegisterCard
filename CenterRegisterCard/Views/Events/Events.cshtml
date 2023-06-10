@@ -1,0 +1,55 @@
+﻿@using CenterRegisterCard.Domain.Models;
+@using CenterRegisterCard.DAL;
+@{
+    ViewData["Title"] = "Мероприятия города";
+}
+<h1>@ViewData["Title"]</h1>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Мероприятия</title>
+    <link rel="stylesheet" href="~/css/event.css">
+    <link rel="stylesheet" href="~/bootstrap-5.2.3-dist/css/bootstrap-grid.min.css">
+    <link rel="stylesheet" href="~/bootstrap-5.2.3-dist/js/bootstrap.esm.min.js">
+    <link rel="stylesheet" href="~/bootstrap-5.2.3-dist/js/bootstrap.min.js">
+</head>
+
+<body>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            <li class="nav-item">
+                <a class="nav-link active" style="color: #e3f2fd;" aria-current="page"
+                   href="event.html">Мероприятия</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" style="color: #e3f2fd;" href="auth/auth.html">Войти</a>
+            </li>
+        </ul>
+    </div>
+    <div class="cards">
+
+        @{
+            foreach(Event item in ViewBag.EventsList)
+        {
+        <div class="card" style="width: 26rem;">
+                        <a href="@Url.Action("EventViewPage", "Events", new { passport = $"{item.EventId}" })">
+            <img src="~/EventImages/@item.ImageEvent" class="card-img-top" alt="картинка">
+                    </a>
+            <div class="card-body">
+                <h5 class="card-title">@item.Title</h5>
+                <p class="card-text">
+                             @item.DescriptionTitle
+                </p>
+            </div>
+        </div>
+                
+        }
+        }
+
+    </div>
+
+
+</body>
+
+</html>

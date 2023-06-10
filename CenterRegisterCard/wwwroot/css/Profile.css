@@ -1,0 +1,15 @@
+﻿.container_profile_data{
+    width:auto;
+    height:auto;
+    font-size:2ex;
+}
+
+.checkbox-custom input[type="checkbox"]:checked + label:before {
+    content: "\2714";
+    color: green;
+}
+
+.checkbox-custom input[type="checkbox"]:not(:checked) + label:before {
+    content: "\2718";
+    color: red;
+}

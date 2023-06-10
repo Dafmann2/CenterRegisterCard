@@ -1,0 +1,100 @@
+﻿@using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Model;
+@model CenterRegisterCard.Domain.ViewModels.Account.ChangeDataViewModel
+@using CenterRegisterCard.DAL;
+
+@{
+    Layout = "_Layout";
+    ViewBag.Title = "Изменение данных";
+}
+
+<div style="padding: 20px;"></div>
+
+<div class="container py-5">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="row justify-content-center">
+                <div class="col-md-10">
+                    <span class="anchor"></span>
+                    <div class="card card-account card-outline-secondary border border-white">
+                        <div class="card-header">
+                            <h3 class="mb-0 text-center paragraphHome text-black">Изменение данных</h3>
+                        </div>
+                        <div class="card-body">
+                            <form asp-controller="Account" asp-action="ChangeData">
+                                <div asp-validation-summary="All" style="font-size:23px; font-family:Impact" class="text-danger text-center"></div>
+                                <div class="form-group">
+                                    <div class="form-text">
+                                        <input asp-for="Surname" class="form-control textbox-dg font-weight-bold text-center" value="@CenterRegisterCardContext.userAccount.Surname" placeholder="Фамилия" type="text">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <input asp-for="Name" class="form-control textbox-dg font-weight-bold text-center" value="@CenterRegisterCardContext.userAccount.Name" placeholder="Имя" type="text">
+                                </div>
+                                <div class="form-group">
+                                    <input asp-for="Patronymic" class="form-control textbox-dg font-weight-bold text-center" value="@CenterRegisterCardContext.userAccount.Patronymic" placeholder="Отчество" type="text">
+                                </div>
+                                <div class="form-group">
+                                    <input asp-for="Email" class="form-control textbox-dg font-weight-bold text-center" value="@CenterRegisterCardContext.userAccount.Email" placeholder="Почта" type="text">
+                                </div>
+                                <div class="form-group">
+                                    <input id="number" asp-for="PhoneNumber" typeof="number" maxlength="11" value="@CenterRegisterCardContext.userAccount.PhoneNumber" class="form-control textbox-dg font-weight-bold text-center" placeholder="Телефон" type="text">
+                                    <script>
+                                        document.getElementById('number').onkeydown = function (e) {
+                                            return !(/^[А-Яа-яA-Za-z ]$/.test(e.key));
+                                        }
+                                    </script>
+                                </div>
+                                <div class="form-group">
+                                    <input id="passport" asp-for="PassportSeriesNumber" value="@CenterRegisterCardContext.userAccount.PassportSeriesNumber" maxlength="10" class="form-control textbox-dg font-weight-bold text-center" placeholder="Паспорт серия и номер" type="text">
+                                    <script>
+                                        document.getElementById('passport').onkeydown = function (e) {
+                                            return !(/^[А-Яа-яA-Za-z ]$/.test(e.key));
+                                        }
+                                    </script>
+                                </div>
+                                <div class="form-group">
+                                    <input id="inn" asp-for="INN" maxlength="12" class="form-control textbox-dg font-weight-bold text-center" value="@CenterRegisterCardContext.userAccount.Inn" placeholder="ИНН" type="text">
+                                    <script>
+                                        document.getElementById('inn').onkeydown = function (e) {
+                                            return !(/^[А-Яа-яA-Za-z ]$/.test(e.key));
+                                        }
+                                    </script>
+                                </div>
+                                <div class="form-group">
+                                    <select asp-for="CategoryBeneficiaryID" asp-items="CenterRegisterCardContext.listcategory">
+                                        <option value="@CenterRegisterCardContext.userAccount.CategoryBeneficiaryId" selected>@CenterRegisterCardContext.userAccount.CategoryBeneficiary.CategoryName</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <input asp-for="Login" class="form-control textbox-dg font-weight-bold text-center" value="@CenterRegisterCardContext.userAccount.Login" placeholder="Логин" type="text">
+                                </div>
+                                <div>
+                                    <a class="button-settings">Дата</a>
+                                    <div>
+                                        <input asp-for="BirthdayDate" placeholder="dd-mm-yyyy" type="date" min="@DateTime.Now.AddYears(-100).ToString("yyyy-MM-dd")"
+                                               max="@DateTime.Now.ToString("yyyy-MM-dd")" name="date" id="dateofbirth">
+                                    </div>
+                                </div>
+                                <div>
+                                    @*@using (Html.BeginForm("ChangeData", "Account", FormMethod.Post, new { enctype = "multipart/form-data" }))
+
+                                    <div class="form-group">
+                                            @Html.LabelFor(model => model.ImageFile)
+                                            @Html.TextBoxFor(model => model.ImageFile, new { type = "file" })
+                                    </div>*@
+
+                                    @*<input asp-for="ImageFile" type="file" name="uploadedFile" /><br>
+                                    <input type="submit" value="Загрузить" />*@
+                                </div>
+                                <div>
+                                    <h2 class="paragraphHome text-center"><a asp-controller="Account" target="_blank" asp-action="Login" style="color:deepskyblue;">Вход</a></h2>
+                                </div>
+                                <button class="btn btn-success btn-lg float-right" type="submit">Отправить</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

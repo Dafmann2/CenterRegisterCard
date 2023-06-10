@@ -1,0 +1,13 @@
+﻿@{
+    ViewData["Title"] = "Главная";
+}
+@{
+    var imageUrls = new List<string>
+    {
+        "/Images/1slide.jpg",
+        "/Images/2slide.jpg",
+        "/Images/3slide.jpg"
+    };
+}
+
+@Html.Partial("Slider", imageUrls)
